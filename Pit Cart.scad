@@ -74,17 +74,22 @@ module frameside(position) {
 }
 
 module batteryCompartmentSides(x) {
-    translate([x, 1, 5.5])
-    cube([0.5, backYPosition - 1, compartmentHeight]);
-    translate([x + batteryWidth + woodThickness, 1, 5.5])
-    %cube([0.5, backYPosition - 1, compartmentHeight]);
-    translate([x + woodThickness, 9, 5.5])
+    translate([x, 0, 5.5])
+    cube([0.5, backYPosition, compartmentHeight]);
+    translate([x + batteryWidth + woodThickness, 0, 5.5])
+    cube([0.5, backYPosition, compartmentHeight]);
+    translate([x + woodThickness, 8, 5.5])
     cube([batteryWidth, 0.5, compartmentHeight]);
 }
 
 module backPannel(position) {
-    translate([x, backYPosition, 5.5])
-    cube(1, 1, 1);
+    translate([position, backYPosition, 5.5])
+    cube([compartmentWidth + woodThickness, woodThickness, compartmentHeight]);
+}
+
+module charger() {
+    translate([(topWidth / 2) - (6.9 / 2) , 0, topZPosition - 5.6 - 1])
+    cube([6.9, 14.2, 5.6]);
 }
 
 // 15, 19, 6
@@ -100,3 +105,6 @@ framebottom();
 frameside(0);
 frameside(topWidth - woodThickness);
 batteryCompartmentSides(compartmentWidth + woodThickness);
+backPannel(woodThickness);
+backPannel(topWidth - (woodThickness * 2) - compartmentWidth);
+charger();
